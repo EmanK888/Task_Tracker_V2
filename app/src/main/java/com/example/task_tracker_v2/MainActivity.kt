@@ -16,5 +16,12 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        // TODO Part 5: replace this temporary host with the app's navigation flow.
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.task_list_container, TaskListFragment())
+                .commit()
+        }
     }
 }
