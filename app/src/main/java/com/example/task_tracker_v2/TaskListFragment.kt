@@ -42,7 +42,6 @@ class TaskListFragment : Fragment(R.layout.fragment_task_list) {
             onDelete = viewModel::DeleteTask,
             onShare = { _ -> /* TODO Part 6: connect share Intent */ },
             onItemClick = { task ->
-                // فتح شاشة CreateTasksActivity وإرسال بيانات المهمة للتعديل
                 val intent = Intent(requireContext(), CreateTasksActivity::class.java).apply {
                     putExtra("task_id", task.id)
                     putExtra("task_title", task.title)
@@ -58,7 +57,6 @@ class TaskListFragment : Fragment(R.layout.fragment_task_list) {
         binding.recyclerTasks.adapter = adapter
 
         binding.fabAdd.setOnClickListener {
-            // فتح شاشة CreateTasksActivity لإضافة مهمة جديدة
             val intent = Intent(requireContext(), CreateTasksActivity::class.java)
             startActivity(intent)
         }
