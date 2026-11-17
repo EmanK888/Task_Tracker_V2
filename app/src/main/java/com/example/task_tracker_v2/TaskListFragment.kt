@@ -2,6 +2,7 @@ package com.example.task_tracker_v2
 
 import android.os.Bundle
 import android.view.View
+import android.content.Intent
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -39,7 +40,7 @@ class TaskListFragment : Fragment(R.layout.fragment_task_list) {
         adapter = TaskAdapter(
             onToggle = viewModel::ToggleDone,
             onDelete = viewModel::DeleteTask,
-            onShare = { _ -> /* TODO Part 6: connect share Intent */ },
+            onShare = { task -> shareTask(task) },
             onItemClick = { task -> onEditClick?.invoke(task.id) }
         )
 
@@ -60,6 +61,32 @@ class TaskListFragment : Fragment(R.layout.fragment_task_list) {
             }
         }
     }
+
+    private fun shareTask(task: Task) {
+
+        val shareText = """
+        Task: ${task.title}
+        
+        Description: ${task.description}
+        
+        Due Date: ${task.dueDate}
+    """.trimIndent()
+
+        val shareIntent = Intent(Intent.ACTION_SEND).apply {
+            type = "text/plain"
+            putExtra(Intent.EXTRA_TEXT, shareText)
+        }
+
+        val chooser = Intent.createChooser(
+            shareIntent,
+            "Share Task"
+        )
+
+        startActivity(chooser)
+    }
+
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()
