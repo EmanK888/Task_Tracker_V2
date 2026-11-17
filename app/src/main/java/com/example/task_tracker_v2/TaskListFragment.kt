@@ -1,6 +1,5 @@
 package com.example.task_tracker_v2
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -41,24 +40,14 @@ class TaskListFragment : Fragment(R.layout.fragment_task_list) {
             onToggle = viewModel::ToggleDone,
             onDelete = viewModel::DeleteTask,
             onShare = { _ -> /* TODO Part 6: connect share Intent */ },
-            onItemClick = { task ->
-                val intent = Intent(requireContext(), CreateTasksActivity::class.java).apply {
-                    putExtra("task_id", task.id)
-                    putExtra("task_title", task.title)
-                    putExtra("task_description", task.description)
-                    putExtra("task_due_date", task.dueDate)
-                    putExtra("task_is_done", task.isDone)
-                }
-                startActivity(intent)
-            }
+            onItemClick = { task -> onEditClick?.invoke(task.id) }
         )
 
         binding.recyclerTasks.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerTasks.adapter = adapter
 
         binding.fabAdd.setOnClickListener {
-            val intent = Intent(requireContext(), CreateTasksActivity::class.java)
-            startActivity(intent)
+            onAddClick?.invoke() // TODO Part 5: navigate to Add task screen
         }
 
         // Collect the StateFlow only while the fragment view is started.
