@@ -5,4 +5,5 @@
     <string name="delete">Delete</string>
     <string name="share">Share</string>
     <string name="task_done">Task done</string>
+    <string name="title_activity_create_task.xml">create_task.xml</string>
 </resources>

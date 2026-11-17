@@ -1,5 +1,6 @@
 package com.example.task_tracker_v2
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -9,9 +10,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.task_tracker.TaskRepository
-import com.example.task_tracker.TaskViewModel
-import com.example.task_tracker.TaskViewModelFactory
+import com.example.task_tracker_v2.TaskRepository
+import com.example.task_tracker_v2.TaskViewModel
+import com.example.task_tracker_v2.TaskViewModelFactory
 import com.example.task_tracker_v2.databinding.FragmentTaskListBinding
 import kotlinx.coroutines.launch
 
@@ -40,14 +41,26 @@ class TaskListFragment : Fragment(R.layout.fragment_task_list) {
             onToggle = viewModel::ToggleDone,
             onDelete = viewModel::DeleteTask,
             onShare = { _ -> /* TODO Part 6: connect share Intent */ },
-            onItemClick = { task -> onEditClick?.invoke(task.id) }
+            onItemClick = { task ->
+                // فتح شاشة CreateTasksActivity وإرسال بيانات المهمة للتعديل
+                val intent = Intent(requireContext(), CreateTasksActivity::class.java).apply {
+                    putExtra("task_id", task.id)
+                    putExtra("task_title", task.title)
+                    putExtra("task_description", task.description)
+                    putExtra("task_due_date", task.dueDate)
+                    putExtra("task_is_done", task.isDone)
+                }
+                startActivity(intent)
+            }
         )
 
         binding.recyclerTasks.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerTasks.adapter = adapter
 
         binding.fabAdd.setOnClickListener {
-            onAddClick?.invoke() // TODO Part 5: navigate to Add task screen
+            // فتح شاشة CreateTasksActivity لإضافة مهمة جديدة
+            val intent = Intent(requireContext(), CreateTasksActivity::class.java)
+            startActivity(intent)
         }
 
         // Collect the StateFlow only while the fragment view is started.
