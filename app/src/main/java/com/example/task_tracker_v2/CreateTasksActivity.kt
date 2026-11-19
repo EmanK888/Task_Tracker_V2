@@ -1,5 +1,6 @@
 package com.example.task_tracker_v2
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -11,6 +12,8 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import java.util.Calendar
+import java.util.Locale
 
 class CreateTasksActivity : AppCompatActivity() {
 
@@ -58,6 +61,8 @@ class CreateTasksActivity : AppCompatActivity() {
             checkBox.isChecked = task.isDone
         }
 
+        setupDueDatePicker(editDueDate)
+
         buttonBack.setOnClickListener { finish() }
 
         buttonSave.setOnClickListener {
@@ -94,6 +99,45 @@ class CreateTasksActivity : AppCompatActivity() {
                 )
             }
             finish()
+        }
+    }
+
+    private fun setupDueDatePicker(editDueDate: EditText) {
+        editDueDate.isFocusable = false
+        editDueDate.isClickable = true
+
+        editDueDate.setOnClickListener {
+            val calendar = Calendar.getInstance()
+
+            val currentDate = editDueDate.text?.toString()?.trim()
+            if (!currentDate.isNullOrEmpty()) {
+                val parts = currentDate.split("-")
+                if (parts.size == 3) {
+                    val year = parts[0].toIntOrNull()
+                    val month = parts[1].toIntOrNull()?.minus(1)
+                    val day = parts[2].toIntOrNull()
+                    if (year != null && month != null && day != null && month in 0..11 && day in 1..31) {
+                        calendar.set(year, month, day)
+                    }
+                }
+            }
+
+            DatePickerDialog(
+                this,
+                { _, selectedYear, selectedMonth, selectedDay ->
+                    val formattedDate = String.format(
+                        Locale.getDefault(),
+                        "%04d-%02d-%02d",
+                        selectedYear,
+                        selectedMonth + 1,
+                        selectedDay
+                    )
+                    editDueDate.setText(formattedDate)
+                },
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+            ).show()
         }
     }
 }
