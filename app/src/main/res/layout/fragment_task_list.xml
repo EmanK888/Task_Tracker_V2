@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_tasks"
@@ -25,6 +26,7 @@
         android:text="@string/no_tasks_yet"
         android:textAppearance="?attr/textAppearanceBodyLarge"
         android:visibility="gone"
+        android:textColor="@color/on_surface"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,6 +41,7 @@
         android:src="@android:drawable/ic_input_add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:tint="?attr/colorOnPrimaryContainer" />
+        app:backgroundTint="@color/primary"
+        app:tint="@color/on_primary" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

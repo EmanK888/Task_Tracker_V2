@@ -22,7 +22,7 @@ class TaskListFragment : Fragment(R.layout.fragment_task_list) {
 
     // Part 5 can set these callbacks without editing this fragment.
     var onAddClick: (() -> Unit)? = null
-    var onEditClick: ((Int) -> Unit)? = null
+    var onEditClick: ((Task) -> Unit)? = null
 
     private val viewModel: TaskViewModel by viewModels {
         TaskViewModelFactory(
@@ -40,7 +40,7 @@ class TaskListFragment : Fragment(R.layout.fragment_task_list) {
             onToggle = viewModel::ToggleDone,
             onDelete = viewModel::DeleteTask,
             onShare = { _ -> /* TODO Part 6: connect share Intent */ },
-            onItemClick = { task -> onEditClick?.invoke(task.id) }
+            onItemClick = { task -> onEditClick?.invoke(task) }
         )
 
         binding.recyclerTasks.layoutManager = LinearLayoutManager(requireContext())

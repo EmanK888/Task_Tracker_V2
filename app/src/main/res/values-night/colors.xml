@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Primary Colors -->
+    <color name="primary">#8EA9D6</color>
+    <color name="primary_variant">#AFC2E5</color>
+    <color name="on_primary">#17243A</color>
+
+    <!-- Secondary Colors -->
+    <color name="secondary">#AAB8CA</color>
+    <color name="on_secondary">#17243A</color>
+
+    <!-- Background & Surface -->
+    <color name="background">#121B2A</color>
+    <color name="surface">#202D40</color>
+    <color name="on_background">#F1F5F9</color>
+    <color name="on_surface">#F1F5F9</color>
+
+    <!-- Status Colors -->
+    <color name="success">#4ADE80</color>
+    <color name="error">#F87171</color>
+
+</resources>

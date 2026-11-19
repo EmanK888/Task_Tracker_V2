@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFF8F8"
+    android:background="@color/background"
+    android:fillViewport="true"
+    android:clipToPadding="false"
     tools:context=".CreateTasksActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <!-- Back button -->
     <Button
@@ -16,24 +23,28 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="40dp"
         android:text="Back"
+        android:backgroundTint="@color/primary"
+        android:textColor="@color/on_primary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Screen title -->
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:gravity="center"
         android:text="Create Task"
-        android:textColor="#A244B1"
+        android:textColor="@color/primary"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/button3"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button3"
-        app:layout_constraintTop_toTopOf="@+id/button3" />
+        app:layout_constraintTop_toTopOf="@+id/button3"
+        app:layout_constraintBottom_toBottomOf="@+id/button3" />
 
     <!-- Title -->
     <EditText
@@ -47,8 +58,8 @@
         android:hint="Title"
         android:inputType="text"
         android:textAlignment="center"
-        android:textColor="#000000"
-        android:textColorHint="#A244B1"
+        android:textColor="@color/on_surface"
+        android:textColorHint="@color/secondary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button3" />
@@ -62,7 +73,7 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
         android:text="The title cannot be empty"
-        android:textColor="#FD0000"
+        android:textColor="@color/error"
         android:textStyle="bold"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
@@ -70,44 +81,49 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextText2" />
 
     <!-- Description -->
+
+    <!-- Due date -->
+
+    <!-- Checkbox -->
     <EditText
         android:id="@+id/editTextTextMultiLine"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
         android:gravity="start|top"
         android:hint="Description"
         android:inputType="textMultiLine"
-        android:minLines="3"
+        android:maxLines="4"
+        android:minLines="1"
         android:textAlignment="center"
-        android:textColor="#000000"
-        android:textColorHint="#A244B1"
+        android:textColor="@color/on_surface"
+        android:textColorHint="@color/secondary"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-    <!-- Due date -->
     <EditText
         android:id="@+id/textDueDate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
         android:hint="Due date"
         android:inputType="text"
         android:textAlignment="center"
-        android:textColor="#000000"
-        android:textColorHint="#A244B1"
+        android:textColor="@color/on_surface"
+        android:textColorHint="@color/secondary"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine" />
 
-    <!-- Checkbox -->
     <CheckBox
         android:id="@+id/checkBox"
         android:layout_width="wrap_content"
@@ -115,6 +131,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:text="IsDone"
+        android:textColor="@color/on_surface"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textDueDate" />
 
@@ -127,8 +144,13 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
         android:text="Save"
+        android:backgroundTint="@color/primary"
+        android:textColor="@color/on_primary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toBottomOf="@+id/checkBox"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="34dp"
+        />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
